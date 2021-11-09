@@ -1,0 +1,7 @@
+{
+    "name": "catedra/cliente-dwf",
+    "description": "Cliente web para catedra de Frameworks",
+    "require": {
+        "guzzlehttp/guzzle": "^7.4"
+    }
+}
