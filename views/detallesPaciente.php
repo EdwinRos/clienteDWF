@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +18,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <span class="navbar-brand">Paciente</span>
+            <span class="navbar-brand">Paciente<?php echo $_SESSION['nombrePaciente']?></span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -25,9 +28,10 @@
                         <a class="nav-link active" href="/registropaciente">Ver citas</a>
                     </li>
                 </ul>
-                <form>
+                <form action="../controllers/registro.php" method="post">
                     <span class="navbar-text">
-                        <button class="btn btn-primary">Cerrar sesion</button>
+                        <input type="hidden" name="action" value="logOut">
+                        <button type="submit" class="btn btn-primary">Cerrar sesion</button>
                     </span>
                 </form>
             </div>

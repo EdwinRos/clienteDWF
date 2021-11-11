@@ -29,11 +29,11 @@ class Registro
             curl_close($curl);
             if($resp != null){
                 header('Location: ../views/registro_completo.php');
+            }else {
+                header('Location: ../views/registro.php');
             }
-        } else {
-            header('Location: ../views/registro.php');
         }
-    }
+        } 
 
     public function LoginPaciente(){
         $url = "http://localhost:8080/DWF/v1/paciente/login";
@@ -64,9 +64,9 @@ class Registro
                 $_SESSION["nombrePaciente"] = $paciente["nombrePaciente"];
                 $_SESSION["apellidoPaciente"] = $paciente["apellidoPaciente"];
                 $_SESSION["fnacimiento"] = $paciente["fechaNacimiento"];
-                header('Location: ../views/datos.php');
+                header('Location: ../views/detallesPaciente.php');
             } else {
-                $response = false;
+                header('Location: ../index.php');
             }
         }
 
@@ -79,8 +79,8 @@ class Registro
         session_unset();
 
         session_destroy();
-
-        header('Location: http://localhost/clienteDWF/index.php');
+        
+        header('Location: ../index.php');
     }
 }
 
@@ -99,8 +99,6 @@ switch ($action) {
         break;
     case 'login':
         $response = $registro ->LoginPaciente();
-        header('Location: ../views/datos.php');
-       
         break;
     case "logOut":
         $registro ->logOut();
@@ -108,4 +106,5 @@ switch ($action) {
     default:
         throw new \Exception('Unexpected value');
 }
+
 
