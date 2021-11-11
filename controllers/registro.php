@@ -61,6 +61,8 @@ class Registro
             if($paciente["pacienteId"] != null){
                 $_SESSION["username"] = $paciente["pacienteId"];
                 $_SESSION["correo"] = $paciente["correoPaciente"];
+                $_SESSION["sexo"] = $paciente["sexo"];
+                $_SESSION["duiPaciente"] = $paciente["duiPaciente"];
                 $_SESSION["nombrePaciente"] = $paciente["nombrePaciente"];
                 $_SESSION["apellidoPaciente"] = $paciente["apellidoPaciente"];
                 $_SESSION["fnacimiento"] = $paciente["fechaNacimiento"];

@@ -1,5 +1,12 @@
 <?php
-session_start();
+    session_start();
+
+    function obtener_edad_segun_fecha($fecha_nacimiento){
+        $nacimiento = new DateTime($fecha_nacimiento);
+        $ahora = new DateTime(date("Y-m-d"));
+        $diferencia = $ahora->diff($nacimiento);
+        return $diferencia->format("%y");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +30,7 @@ session_start();
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <span class="navbar-brand">Paciente<?php echo $_SESSION['nombrePaciente']?></span>
+            <span class="navbar-brand">Paciente</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -46,8 +53,29 @@ session_start();
         <div class="row">
             <div class="col-md-12 mt-5">
                 <div class="jumbotron">
-                    <h1 class="display-4">Hello, world!</h1>
-                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <h1 class="display-4">Hola, <?php echo $_SESSION['nombrePaciente']?>!</h1>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                            Tus datos
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Correo: <?php echo $_SESSION['correo']?></li>
+                            <li class="list-group-item">Nombre: <?php echo $_SESSION['nombrePaciente']?></li>
+                            <li class="list-group-item">Apellido: <?php echo $_SESSION['apellidoPaciente']?></li>
+                            <li class="list-group-item">DUI: <?php echo $_SESSION['duiPaciente']?></li>
+                            <li class="list-group-item">
+                                Genero: 
+                                <?php 
+                                    if($_SESSION['sexo'] == "M"){
+                                        echo "Masculino";
+                                    }else{
+                                        echo "Femenino";
+                                    }
+                                ?>
+                            </li>
+                            <li class="list-group-item">Edad: <?php echo obtener_edad_segun_fecha(substr($_SESSION['fnacimiento'], 0, 10))?></li>
+                        </ul>
+                    </div>
                     <hr class="my-4">
                     <p>A continuacion le mostramos las opciones que puede consultar</p>
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
