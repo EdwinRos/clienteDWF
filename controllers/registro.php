@@ -64,11 +64,10 @@ class Registro
                 $_SESSION["nombrePaciente"] = $paciente["nombrePaciente"];
                 $_SESSION["apellidoPaciente"] = $paciente["apellidoPaciente"];
                 $_SESSION["fnacimiento"] = $paciente["fechaNacimiento"];
-
                 header('Location: ../views/datos.php');
+            } else {
+                $response = false;
             }
-        } else {
-            header('Location: ../index.php');
         }
 
 
@@ -88,6 +87,7 @@ class Registro
 $registro = new Registro();
 
 $action = null;
+$response = null;
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -98,7 +98,9 @@ switch ($action) {
         $registro->registroPaciente();
         break;
     case 'login':
-        $registro ->LoginPaciente();
+        $response = $registro ->LoginPaciente();
+        header('Location: ../views/datos.php');
+       
         break;
     case "logOut":
         $registro ->logOut();
