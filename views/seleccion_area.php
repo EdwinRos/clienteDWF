@@ -15,7 +15,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1 class="display-4">Seleccione un area</h1>
+            <h1 class="display-4">Lisat de </h1>
             <p class="lead">Seleccione el area para hacer la cita</p>
         </div>
     </div>
