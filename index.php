@@ -13,7 +13,7 @@
 	<body>
 		<?php
 			if (isset($_SESSION['username'])) {
-				require_once 'views/mainView.php';
+				require_once 'views/datos.php';
 			} else {
 				if (isset($_GET['page'])) {
 					require_once 'views/' . $_GET['page'] . 'View.php';
