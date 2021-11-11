@@ -39,7 +39,7 @@
             <img src="https://i.ibb.co/dfyPkNT/Hos.png" class="img-fluid" alt="Responsive image">
         </div>
         <div class="col div-img">
-            <form action="/controllers/registro.php" method="post" class="mt-3 ">
+            <form action="../controllers/registro.php" method="post" class="mt-3 ">
                 <h1 class="display-4" style="color: #253439">Registro nuevo paciente</h1>
                 <p class="lead" style="color: #253439">LLene los campos con su informacion</p>
                 <label for="" class="form-label">Nombres</label>
@@ -51,7 +51,6 @@
                         class="form-control"
                         placeholder="Nombres"
                         required
-                        autocomplete="nope"
                 />
                 <label for="" class="form-label">Apellidos</label>
                 <input
