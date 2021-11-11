@@ -29,7 +29,7 @@
 			<label for="floatingPassword">Contraseña</label>
 		</div>
 		<button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar Sesión</button>
-        <a href="../views/registro.php" >Regisrtrate</a>
+        <a href="http://localhost:63342/clienteDWF/views/registro.php" >Regisrtrate</a>
 	</form>
 	<!-- <div class="mt-3">
 		<div class="text-center">
