@@ -15,6 +15,11 @@ session_start();
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous"
     />
+    <style>
+        .w-90{
+            width: 90%;
+        }
+    </style>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -23,9 +28,9 @@ session_start();
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center w-90">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/registropaciente">Ver citas</a>
+                        <span class="nav-link active">Es un gusto atenderle</span>
                     </li>
                 </ul>
                 <form action="../controllers/registro.php" method="post">
@@ -44,7 +49,24 @@ session_start();
                     <h1 class="display-4">Hello, world!</h1>
                     <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
                     <hr class="my-4">
-                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                    <p>A continuacion le mostramos las opciones que puede consultar</p>
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-fluid">
+                            <div class="collapse navbar-collapse" id="navbarText">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/registropaciente">Ver citas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/registropaciente">Calificar citas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="mailto:hospitallasalud01@gmail.com?Subject=Solicitar%20una%20cita">Pedir cita</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
             </div>
         </div>
