@@ -23,8 +23,8 @@
         crossorigin="anonymous"
     />
     <style>
-        .w-90{
-            width: 90%;
+        .w-85{
+            width: 85%;
         }
     </style>
     <link rel="stylesheet" href="../static/css/cards-paciente.css">

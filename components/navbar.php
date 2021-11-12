@@ -5,7 +5,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center w-90">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center w-85">
                     <li class="nav-item">
                         <span class="nav-link active">Es un gusto atenderle</span>
                     </li>
