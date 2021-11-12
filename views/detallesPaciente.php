@@ -55,7 +55,7 @@ include "../components/navbar.php"
                                                 <a class="nav-link" href="citas_calificar.php">Calificar citas</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="citas_calificar.php">Mi expediente</a>
+                                                <a class="nav-link" href="paciente_expediente.php">Mi expediente</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="mailto:hospitallasalud01@gmail.com?Subject=Solicitar%20una%20cita">Pedir cita</a>
