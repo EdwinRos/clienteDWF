@@ -51,7 +51,7 @@ background: linear-gradient(0deg, rgba(20,57,89,1) 0%, rgba(61,121,173,1) 4%, rg
                  <p class="lead">Puede agendar una cita con uno de nuestro recepcionistas haciendo uso del boton en su pagina de inicio</p>
                  <hr>
             </div>
-         <?
+         <?php
         }else{
         for ($i = 0; $i < count($citas); $i++) {
         
