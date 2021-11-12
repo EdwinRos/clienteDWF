@@ -39,9 +39,10 @@ include "../components/navbar.php"
                     <div class="container mb-3">
                     <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
-                        <h1 class="display-4 text-center mt-5 mb-5">Hola, <?php echo $_SESSION['nombrePaciente']?>!</h1>
-                        <p>A continuacion le mostramos las opciones que puede consultar</p>
+                        <div class="col-md-6 d-flex justify-content-center align-items-center">
+                            <div>
+                            <h1 class="display-4 text-center mt-5 mb-5">Hola, <?php echo $_SESSION['nombrePaciente']?>!</h1>
+                            <p>A continuacion le mostramos las opciones que puede consultar</p>
                             <br>
                             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                                 <div class="container-fluid">
@@ -63,6 +64,7 @@ include "../components/navbar.php"
                                     </div>
                                 </div>
                             </nav>
+                            </div>
                         </div>
                         <div class="col-md-6 mt-5">
                             <div class="profile-card-4 text-center">
