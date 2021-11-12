@@ -33,7 +33,61 @@ class Registro
                 header('Location: ../views/registro.php');
             }
         }
-        } 
+    }
+
+    public function citaRevisada(){
+            
+           $url = "http://localhost:8080/DWF/v1/paciente/cita/revisada";
+
+           $arrayData = $_POST;
+
+           $cita = array("citasId"=>$arrayData["citasId"]);
+
+           $curl = curl_init($url);
+           curl_setopt($curl, CURLOPT_URL, $url);
+           curl_setopt($curl, CURLOPT_POST, true);
+           curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+           $headers = array(
+               "Content-Type: application/json",
+           );
+           curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+           $data = json_encode($cita);
+           curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+           $resp = curl_exec($curl);
+           curl_close($curl);
+           
+    }
+    
+    public function enviarObservar(){
+        $url = "http://localhost:8080/DWF/v1/paciente/observacion";
+
+        $arrayData = $_POST;
+        unset($arrayData['action']);
+
+        $idDoctor = array("doctorId"=>$arrayData['idDoctor']);
+
+        unset($arrayData['idDoctor']);
+
+        $arrayData += array("idDoctor"=>$idDoctor);
+
+        $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            $headers = array(
+                "Content-Type: application/json",
+            );
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+            $data = json_encode($arrayData);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            $resp = curl_exec($curl);
+            curl_close($curl);
+            header('Location: ../views/gracias_observacion.php');
+    }
 
     public function LoginPaciente(){
         $url = "http://localhost:8080/DWF/v1/paciente/login";
@@ -105,8 +159,10 @@ switch ($action) {
     case "logOut":
         $registro ->logOut();
         break;
+    case 'observacion':
+        $response = $registro->citaRevisada();
+        $response = $registro->enviarObservar();
+        break;
     default:
         throw new \Exception('Unexpected value');
 }
-
-
