@@ -34,11 +34,12 @@ background: linear-gradient(0deg, rgba(20,57,89,1) 0%, rgba(61,121,173,1) 4%, rg
 <?php
  include "../components/navbar.php";
 ?>
-<div class="container">
+<div class="container mt-5 mb-5">
+    <a href="http://localhost/clienteDWF/views/detallesPaciente.php" class="btn btn-primary">Regresar</a>
     <div class="row">
         <div class="col">
-            <h1 class="display-4">Lisat de citas </h1>
-            <p class="lead">Paciente, se detallan sus citas para los proximos dias.</p>
+            <h1 class="display-4">Listado de citas </h1>
+            <p class="lead">Estimado <?php echo $_SESSION['nombrePaciente']?>, se detallan sus citas para los proximos dias.</p>
         </div>
     </div>
     <div class="row">

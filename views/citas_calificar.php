@@ -37,7 +37,8 @@ $idPaciente = $_SESSION["username"];
     <?php
      include "../components/navbar.php";
     ?>
-    <div class="container">
+    <div class="container mt-5 mb-5">
+    <a href="http://localhost/clienteDWF/views/detallesPaciente.php" class="btn btn-primary">Regresar</a>
         <div class="row">
             <div class="col">
                 <h1 class="display-4">Puede calificar su experiencia en sus citas</h1>
