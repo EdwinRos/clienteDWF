@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+setlocale(LC_ALL,"es_ES");
 $idPaciente = $_SESSION['username'];
 ?>
 <!DOCTYPE html>
@@ -44,8 +44,17 @@ background: linear-gradient(0deg, rgba(20,57,89,1) 0%, rgba(61,121,173,1) 4%, rg
     <div class="row">
         <?php
         $citas = json_decode(file_get_contents("http://localhost:8080/DWF/v1/paciente/citas/$idPaciente"), true);
-
+        if(count($citas) <1){
+         ?>
+            <div class="col">
+                <h1 class="display-4">Aun no ha pasado una consulta con uno de nuestros profesionales</h1>
+                 <p class="lead">Puede agendar una cita con uno de nuestro recepcionistas haciendo uso del boton en su pagina de inicio</p>
+                 <hr>
+            </div>
+         <?php
+        }else{
         for ($i = 0; $i < count($citas); $i++) {
+        
             $doctor = $citas[$i]["idDoctor"];
             $area = $doctor["idArea"];
             ?>
@@ -69,7 +78,7 @@ background: linear-gradient(0deg, rgba(20,57,89,1) 0%, rgba(61,121,173,1) 4%, rg
                           $fecha = $citas[$i]["fechaCita"];
                           $date = new DateTime(substr($fecha,0,10).$hora);
                           $date ->modify("+12 hours");
-
+                         
                         ?>
                     <P class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#253439"
                             class="bi bi-calendar-event" viewBox="0 0 16 16">
@@ -77,7 +86,7 @@ background: linear-gradient(0deg, rgba(20,57,89,1) 0%, rgba(61,121,173,1) 4%, rg
                                 d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
                             <path
                                 d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                        </svg> <b>fecha y hora de su cita: <br></b><?php echo $date->format("g:ia \n l jS F Y"); ?></P>
+                        </svg> <b>fecha y hora de su cita: <br></b><?php echo $date->format("g:ia \n  j/d/y"); ?></P>
                     <P class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#253439"
                             class="bi bi-person-badge-fill" viewBox="0 0 16 16">
                             <path
@@ -99,6 +108,7 @@ background: linear-gradient(0deg, rgba(20,57,89,1) 0%, rgba(61,121,173,1) 4%, rg
         </div>
         <?php
         }
+    }
         ?>
     </div>
 </div>
