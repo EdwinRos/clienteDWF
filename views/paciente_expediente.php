@@ -1,7 +1,7 @@
 <?php
 session_start();
-$idPaciente = $_SESSION['pacienteId'];
-
+$idPaciente = $_SESSION['username'];
+echo $idPaciente;
 ?>
 
 
@@ -12,93 +12,119 @@ $idPaciente = $_SESSION['pacienteId'];
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../static/css/expediente.css">
 
-   
     <title>Futuras citas</title>
 </head>
-<?php
- include "../components/navbar.php";
-?>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h1 class="display-4">Mi Expediente </h1>
-            <p class="lead">Paciente, se le detallaran a continue su expediente de citas.</p>
-        </div>
-    </div>
-    <div class="row">
-        <?php
-        $expediente = json_decode(file_get_contents("http://localhost:8080/DWF/v1/paciente/expediente/$idPaciente"), true);
-        echo $expediente;
-        if(count($expediente) <1){
-         ?>
-            
-         <?php
-        }else{
-        for ($i = 0; $i < count($expediente); $i++) {
-        
-            $paciente = $expediente[$i]["idPaciente"];
-            $area = $doctor["idArea"];
-            ?>
-        <div class="col">
-            <div class="card carta" style="width: 18rem;">
-                <img src="https://th.bing.com/th/id/R.cde47105770f0f1ac96cfd5d38a0b744?rik=hFIF75VALfsZTA&pid=ImgRaw&r=0"
-                    class="card-img-top" alt="hospital fondo">
-                <div class="card-body">
-                    <h5 class="card-title"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#253439"
-                            class="bi bi-bookmark-dash-fill" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM6 6a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z" />
-                        </svg> <?php echo $citas[$i]["titulo"] ?></h5>
-                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#253439"
-                            class="bi bi-paperclip" viewBox="0 0 16 16">
-                            <path
-                                d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0V3z" />
-                        </svg> <b>Extras: </b><?php echo $citas[$i]["extras"]?></p>
-                    <?php
-                          $hora = $citas[$i]["horaCita"];
-                          $fecha = $citas[$i]["fechaCita"];
-                          $date = new DateTime(substr($fecha,0,10).$hora);
-                          $date ->modify("+12 hours");
-                         
-                        ?>
-                    <P class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#253439"
-                            class="bi bi-calendar-event" viewBox="0 0 16 16">
-                            <path
-                                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                            <path
-                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                        </svg> <b>fecha y hora de su cita: <br></b><?php echo $date->format("g:ia \n  j/d/y"); ?></P>
-                    <P class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#253439"
-                            class="bi bi-person-badge-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.245z" />
-                        </svg> <b>Con el doctor: <br></b>
-                        <?php echo $doctor["nombreDoctor"]. $doctor["apellidoDoctor"] ?>
-                    </P>
-                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#253439"
-                            class="bi bi-building" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694 1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z" />
-                            <path
-                                d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z" />
-                        </svg> <b>En el area de:</b>
-                        <?php echo $area["nombreArea"] ?>
-                    </p>
-                </div>
+
+<body>
+    <?php
+    include "../components/navbar.php";
+    ?>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="display-4">Mi Expediente </h1>
+                <p class="lead">Paciente, se le detallaran a continuacion su expediente de citas.</p>
             </div>
         </div>
-        <?php
-        }
-    }
-        ?>
+        <div class="row">
+            <?php
+            $expediente = json_decode(file_get_contents("http://localhost:8080/DWF/v1/paciente/expediente/$idPaciente"), true);
+            if (count($expediente) < 1) {
+            ?>
+                <div class="col">
+                    <h1 class="display-4">Aun no ha pasado una consulta con uno de nuestros profesionales</h1>
+                    <p class="lead">Puede agendar una cita con uno de nuestro recepcionistas haciendo uso del boton en su pagina de inicio</p>
+                    <hr>
+                </div>
+                <?php
+            } else {
+                for ($i = 0; $i < count($expediente); $i++) {
+
+                    $detalles = $expediente[$i]["detalles"];
+                    $registro = $expediente[$i]["registro"];
+                    $receta = $expediente[$i]["receta"];
+                    $fecharegistro = $expediente[$i]["fechaRegistro"];
+
+
+                ?>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="solution_card">
+                                    <div class="hover_color_bubble"></div>
+                                    <div class="so_top_icon">
+                                        <svg id="Layer_1" enable-background="new 0 0 512 512" height="50" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg">
+                                            <g>
+                                                <g>
+                                                    <g>
+                                                        <g>
+                                                            <path d="m47.478 452.317 295.441 19.76c5.511.369 10.277-3.8 10.645-9.31l28.393-424.517c.369-5.511-3.8-10.276-9.31-10.645l-295.441-19.76c-5.511-.369-10.276 3.8-10.645 9.31l-28.394 424.517c-.368 5.511 3.8 10.277 9.311 10.645z" fill="#fae19e"></path>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <g>
+                                                                    <g>
+                                                                        <g>
+                                                                            <path d="m17.5 504.177h226.14l79.96-79.605v-355.86c0-5.523-4.477-10-10-10h-296.1c-5.523 0-10 4.477-10 10v425.466c0 5.522 4.477 9.999 10 9.999z" fill="#fff9e9"></path>
+                                                                        </g>
+                                                                        <path d="m313.601 58.712h-40c5.523 0 10 4.477 10 10v355.861l-.258 40.078 40.258-40.078v-355.861c0-5.523-4.477-10-10-10z" fill="#fff4d6"></path>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                            <path d="m243.64 504.177v-70.253c0-5.523 4.477-10 10-10h69.96z" fill="#ffeec2"></path>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <path d="m468.636 248.58-33.372.165v-50.826c0-9.183 7.463-16.662 16.673-16.708h.007c9.217-.046 16.693 7.371 16.693 16.562v50.807z" fill="#fed23a"></path>
+                                                        <path d="m451.96 504.177c-10.362-10.277-16.196-24.263-16.208-38.857l-.062-73.973c0-.644.524-1.169 1.171-1.173l30.038-.149c.647-.003 1.171.517 1.171 1.161l.062 74.079c.012 14.531-5.749 28.472-16.015 38.756z" fill="#54b1ff"></path>
+                                                        <path d="m451.959 469.333h-.01c-14.434.072-26.14-11.542-26.14-25.935v-213.527c0-6.778 5.477-12.283 12.255-12.316l27.626-.137c6.826-.034 12.378 5.49 12.378 12.316v213.436c0 14.38-11.687 26.091-26.109 26.163z" fill="#fdf385"></path>
+                                                        <path d="m465.69 217.417-23.769.118c6.037.79 10.708 5.94 10.708 12.198v213.437c0 9.823-5.455 18.397-13.507 22.87 3.79 2.115 8.164 3.317 12.826 3.293h.01c14.422-.072 26.109-11.783 26.109-26.163v-213.436c.001-6.826-5.551-12.351-12.377-12.317z" fill="#faee6e"></path>
+                                                        <path d="m491.274 247.925-71.615.355c-7.305.036-13.226 5.968-13.226 13.248 0 7.281 5.921 13.153 13.226 13.117l58.389-.29v77.489c0 7.281 5.921 13.153 13.226 13.117 7.305-.036 13.226-5.968 13.226-13.248v-90.672c0-7.28-5.922-13.152-13.226-13.116z" fill="#54b1ff"></path>
+                                                        <g>
+                                                            <path d="m491.274 247.925-38.441.188-.167 26.311 25.381-.067v77.489c0 7.281 5.921 13.153 13.226 13.117 7.305-.036 13.226-5.968 13.226-13.248v-90.672c.001-7.282-5.921-13.154-13.225-13.118z" fill="#3da7ff"></path>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                                <g fill="#060606">
+                                                    <path d="m373.147 20.122-295.44-19.761c-9.631-.638-17.984 6.665-18.629 16.293l-2.311 34.557h-39.267c-9.649 0-17.5 7.851-17.5 17.5v425.466c0 9.649 7.851 17.5 17.5 17.5h226.141c1.96 0 3.902-.801 5.292-2.185l34.138-33.987c.347.074.701.133 1.065.157l58.282 3.898c9.302.614 18.005-6.952 18.629-16.293l28.393-424.515c.639-9.528-6.766-17.993-16.293-18.63zm-122.006 465.902v-52.1c0-1.378 1.122-2.5 2.5-2.5h51.9zm94.939-23.757c-.244 1.51-1.131 2.286-2.66 2.327l-46.28-3.096 31.752-31.611c1.414-1.407 2.209-3.32 2.209-5.315v-355.86c0-9.649-7.851-17.5-17.5-17.5h-77.993c-9.697 0-9.697 15 0 15h77.993c1.379 0 2.5 1.122 2.5 2.5v347.712h-62.46c-9.649 0-17.5 7.851-17.5 17.5v62.753h-218.641c-1.378 0-2.5-1.122-2.5-2.5v-425.465c0-1.378 1.122-2.5 2.5-2.5h178.168c9.697 0 9.697-15 0-15h-123.868l2.244-33.556c.244-1.511 1.131-2.286 2.661-2.327l295.44 19.76c1.511.244 2.287 1.131 2.328 2.661z"></path>
+                                                    <path d="m267.827 237.047h-204.553c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h204.553c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5z"></path>
+                                                    <path d="m267.827 289.332h-204.553c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h204.553c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5z"></path>
+                                                    <path d="m55.774 192.262c0 4.142 3.358 7.5 7.5 7.5h204.553c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-204.553c-4.142 0-7.5 3.358-7.5 7.5z"></path>
+                                                    <path d="m91.807 139.977c0 4.142 3.358 7.5 7.5 7.5h132.487c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-132.487c-4.142 0-7.5 3.358-7.5 7.5z"></path>
+                                                    <path d="m194.755 438.787c-13.489.036-26.978.065-40.467.086-4.534.007-9.067.013-13.6.016-8.215.006-13.75-1.643-15.59-10.679-1.556-7.64-12.364-6.613-14.464 0-5.19 16.337-13.774 9.936-18.582-1.053-4.797-10.963-6.027-23.233-8.122-34.9-1.54-8.573-14.506-6.17-14.732 1.994-.298 10.751-1.302 21.331-4.031 31.758-2.815 10.758-7.034 21.097-11.222 31.376-3.651 8.961 10.867 12.816 14.464 3.988 3.711-9.108 7.427-18.266 10.193-27.714 5.14 12.36 15.774 26.34 30.927 18.101 2.819-1.533 5.452-3.712 7.763-6.253 7.88 9.106 19.609 8.388 30.584 8.375 15.627-.02 31.254-.054 46.881-.095 9.649-.025 9.667-15.025-.002-15z"></path>
+                                                    <path d="m505.932 246.439c-3.897-3.878-9.255-5.867-14.695-6.014l-5.668.028v-10.719c0-6.529-3.878-13.427-9.433-16.862v-15.098c0-31.069-48.372-30.934-48.372.146v15.1c-5.659 3.498-9.455 9.741-9.455 16.852v10.982c-24.966 1.7-25.037 39.745.028 41.232.16 33.575.152 66.6-.028 100.737-.049 9.414 14.949 9.966 15 .079.18-34.166.188-67.22.029-100.823l37.211-.185s-.048 110.848-.048 160.784c0 24.338-37.219 24.5-37.219-.253l.013-13.677c.585-9.68-14.387-10.583-14.973-.904v12.834c0 11 3.402 20.316 9.988 26.869.586 15.693 7.198 30.878 18.369 41.956 3.205 3.18 7.642 2.208 10.744-.182 11.365-11.385 17.769-26.394 18.169-42.414 4.951-4.931 9.908-9.896 9.908-26.896l.006-68.351c12.97 3.689 26.494-6.348 26.494-19.946v-90.672c0-5.523-2.155-10.709-6.068-14.603zm-72.623-5.727v-10.841c0-2.219 1.523-4.08 3.573-4.633l30.025-.149c.84.208 1.615.605 2.243 1.231.915.911 1.419 2.123 1.419 3.414v10.794zm18.671-52c4.604 0 9.155 4.514 9.155 9.062v12.166l-18.372.091v-12.111c.001-5.053 4.133-9.183 9.217-9.208zm-.011 303.901c-3.487-4.942-6.009-10.531-7.417-16.406 2.322.503 4.674.765 7.027.765 2.627 0 5.253-.326 7.839-.957-1.374 5.964-3.892 11.587-7.449 16.598zm45.031-140.899c0 7.101-11.452 7.66-11.452.131 0 0 .013-70.974.021-77.48.005-4.196-3.483-7.509-7.558-7.509l-58.389.29c-7.242 0-7.073-11.331.074-11.366l71.615-.355c3.463.295 5.359 2.168 5.688 5.617v90.672z"></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="solu_title">
+                                        <h3>Demo 1</h3>
+                                    </div>
+                                    <div class="solu_description">
+                                        <p>
+                                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                                        </p>
+                                        <button type="button" class="read_more_btn">Read More</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            <?php
+                }
+            }
+            ?>
+        </div>
     </div>
-</div>
-</div>
+    </div>
+
 </body>
 
 </html>
-
-<body>
