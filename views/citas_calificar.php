@@ -37,8 +37,7 @@ $idPaciente = $_SESSION["username"];
     <?php
      include "../components/navbar.php";
     ?>
-    <div class="container mt-5 mb-5">
-    <a href="http://localhost/clienteDWF/views/detallesPaciente.php" class="btn btn-primary">Regresar</a>
+    <div class="container">
         <div class="row">
             <div class="col">
                 <h1 class="display-4">Puede calificar su experiencia en sus citas</h1>
@@ -58,8 +57,7 @@ $idPaciente = $_SESSION["username"];
             </div>
             <?php
         }else{
-
-        for ($i = 0; $i < count($citas); $i++) {
+             for ($i = 0; $i < count($citas); $i++) {
             $doctor = $citas[$i]["idDoctor"];
             $area = $doctor["idArea"];
             ?>
@@ -86,7 +84,7 @@ $idPaciente = $_SESSION["username"];
                             <path
                                 d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
                         </svg> <b>La fehca y hora en la que fue su cita:
-                                <br></b><?php echo $date->format("g:ia \n l jS F Y"); ?></P>
+                                <br></b><?php echo $date->format("g:ia \n j/d/y"); ?></P>
                         <P class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#253439"
                             class="bi bi-person-badge-fill" viewBox="0 0 16 16">
                             <path
