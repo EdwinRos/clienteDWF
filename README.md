@@ -1,7 +1,12 @@
 # clienteDWF
-Cliente para clinica 
 
-Abran en la consola la carpeta y ejecuten "composer install" o "composer init", en caso no les funcione vayan a google :D
+Cliente que consumira el web service spring 
 
+## Contenidos
 
-el buen composer ...
+* [Informacion general](#Informacion-general)
+
+## Informacion-general
+
+Web client desarrollado en php para consumir el servicio rest que proporcionamos por medio
+de la aplicacion springbot con la cual los pacientes del hospital(ficticio) podran consultar su informacion
